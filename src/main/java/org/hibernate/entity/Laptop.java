@@ -6,10 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name =  "Computer")
+@Table(name = "Computer")
 public class Laptop {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(name = "computer_name")
