@@ -1,6 +1,11 @@
+<?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-    <class name = "0" table = "">
-
+    <class name="org.hibernate.entity.Laptop" table="computer">
+        <id name="id" column="id">
+            <generator class="native"/>
+        </id>
+        <property name="name" column="computer_name" type="string"/>
+        <property name="price" column="computer_price" type="double"/>
     </class>
 </hibernate-mapping>

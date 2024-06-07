@@ -25,6 +25,7 @@ public class Laptop {
 
     //OneToMany
     @ManyToMany
+    @Transient
     private List<Student> student=new ArrayList<Student>();
 
     //Student ONE TO ONE
