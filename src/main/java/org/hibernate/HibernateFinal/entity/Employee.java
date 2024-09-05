@@ -15,13 +15,16 @@ public class Employee {
     @Column(name = "emp_id")
     private int id;
 
+    private DateOfBirth dateOfBirth;
+
     @Column(name = "work_time")
     private LocalTime localTime;
 
-    public Employee(String name, int id, LocalTime localTime) {
+    public Employee(String name, int id, LocalTime localTime, DateOfBirth dateOfBirth) {
         this.name = name;
         this.id = id;
         this.localTime = localTime;
+        this.dateOfBirth = dateOfBirth;
     }
 
     public Employee() {
@@ -48,6 +51,14 @@ public class Employee {
         return localTime;
     }
 
+    public DateOfBirth getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(DateOfBirth dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
     public void setLocalTime(LocalTime localTime) {
         this.localTime = localTime;
     }
@@ -57,6 +68,7 @@ public class Employee {
         return "Employee{" +
                 "name='" + name + '\'' +
                 ", id=" + id +
+                ", dateOfBirth=" + dateOfBirth +
                 ", localTime=" + localTime +
                 '}';
     }
