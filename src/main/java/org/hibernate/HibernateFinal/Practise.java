@@ -3,6 +3,8 @@ package org.hibernate.HibernateFinal;
 
 import org.hibernate.HibernateFinal.entity.DateOfBirth;
 import org.hibernate.HibernateFinal.entity.Employee;
+import org.hibernate.HibernateFinal.mappingRelationship.Author;
+import org.hibernate.HibernateFinal.mappingRelationship.Book;
 import org.hibernate.HibernateFinal.mappingRelationship.Profile;
 import org.hibernate.HibernateFinal.mappingRelationship.User;
 import org.hibernate.Session;
@@ -17,10 +19,11 @@ public class Practise {
     public static void saveObject() {
 
         Configuration configuration = new Configuration()
-                //.addAnnotatedClass(DateOfBirth.class)
                 .addAnnotatedClass(Employee.class)
                 .addAnnotatedClass(User.class)
-                .addAnnotatedClass(Profile.class);
+                .addAnnotatedClass(Profile.class)
+                .addAnnotatedClass(Author.class)
+                .addAnnotatedClass(Book.class);
 
         setProperties(configuration);
         SessionFactory sessionFactory = configuration.buildSessionFactory();
@@ -29,16 +32,19 @@ public class Practise {
 
         DateOfBirth dateOfBirth = new DateOfBirth(7, "March", (short) 2005);
 
-        Employee employee = new Employee("Kavin", 2, LocalTime.now(), dateOfBirth);
+        Employee employee = new Employee("Kavin", 3, LocalTime.now(), dateOfBirth);
+        User user = new User("Kavin_Adithya", "Kavinadithya3@gmail.com");
 
         Transaction transaction = session.beginTransaction();
 
 //        session.persist(employee);
-//        //System.out.println(session.get(Employee.class, 1));
-//        persistObjects(session);
+//        System.out.println(session.get(Employee.class, 3));
+      //  persistObjects(session);
 
-        User user = new User(1, "Kavin_Adithya", "Kavinadithya3@gmail.com");
-        session.update(user);
+        persistBooks(session);
+
+
+        //session.persist(user);
 
         transaction.commit();
     }
@@ -55,11 +61,22 @@ public class Practise {
 
 
     private static void persistObjects(Session session) {
-        User user = new User(1, "Kavin_Adithya", "Kavinadithya3@gmail.com");
-        session.persist(user);
-        Profile profile = new Profile(1, "Kavin", "Dharani", user);
+        User user = new User( "Kavin_Adithya", "Kavinadithya3@gmail.com");
+        user.setId(3);
+        //session.persist(user);
+        Profile profile = new Profile( "Kavin", "Dharani", user);
 
-        //session.persist(profile);
+       session.persist(profile);
 
+    }
+
+
+    private static void persistBooks(Session session) {
+
+       // session.persist(author);
+        Book book1 = new Book("Java Programming", null);
+        Author author = new Author("James Gosling", book1);
+
+        session.persist(author);
     }
 }

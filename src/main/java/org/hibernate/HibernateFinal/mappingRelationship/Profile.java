@@ -19,7 +19,7 @@ public class Profile {
     @Column(name = "last_name")
     private String lastName;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "user_link")
     private User user;
 
@@ -27,8 +27,7 @@ public class Profile {
         super();
     }
 
-    public Profile(int id, String firstName, String lastName, User user) {
-        this.id = id;
+    public Profile (String firstName, String lastName, User user) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.user = user;

@@ -23,8 +23,8 @@ public class User {
         super();
     }
 
-    public User(int id, String userName, String email) {
-        this.id = id;
+    public User(String userName, String email) {
+
         this.userName = userName;
         this.email = email;
     }
