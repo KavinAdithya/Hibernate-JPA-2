@@ -19,22 +19,25 @@ public class Author {
     private String name;
 
     @OneToMany(cascade =  CascadeType.ALL)
-    @JoinColumn(name = "Books")
-    private ArrayList<Book> bookList;
+    private  List<Book> bookList ;
 
     public Author() {
-        //bookList = new ArrayList<>();
+        super();
     }
 
-    public Author(String name, Book book) {
+    public Author(String name, List<Book> book) {
         this.name = name;
-        bookList = new ArrayList<>();
-        bookList.add(book);
+
+        addBooks(book);
     }
 
-    @SuppressWarnings("unchecked")
+    private void addBooks(List<Book> book) {
+        this.bookList = book;
+    }
+
+
     public List<Book> getBookList() {
-        return (List<Book>) bookList.clone();
+        return  bookList;
     }
 
     public int getId() {
@@ -45,10 +48,8 @@ public class Author {
         return name;
     }
 
-    public void setBook(Book book) {
-        if (bookList == null)
-            bookList = new ArrayList<>();
-        bookList.add(book);
+    public void setBookList(List<Book> book) {
+        this.bookList = book;
     }
 
     public void setId(int id) {
