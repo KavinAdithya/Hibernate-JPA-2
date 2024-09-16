@@ -12,6 +12,7 @@ import org.hibernate.cfg.Configuration;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Practise {
@@ -24,7 +25,9 @@ public class Practise {
                 .addAnnotatedClass(Author.class)
                 .addAnnotatedClass(Book.class)
                 .addAnnotatedClass(Employee.class)
-                .addAnnotatedClass(Department.class);
+                .addAnnotatedClass(Department.class)
+                .addAnnotatedClass(Student.class)
+                .addAnnotatedClass(Course.class);
 
         setProperties(configuration);
         SessionFactory sessionFactory = configuration.buildSessionFactory();
@@ -43,8 +46,8 @@ public class Practise {
       //  persistObjects(session);
 
       //  persistBooks(session);
-        persistDepartment(session);
-
+      //  persistDepartment(session);
+          persistCourse(session);
 
         //session.persist(user);
 
@@ -96,9 +99,34 @@ public class Practise {
         employees.add( new Employee("DharaniKavin", null));
 
         Department department = new Department("Computer Science And Engineering", employees);
+        employees.get(0).setDepartment(department);
+        employees.get(1).setDepartment(department);
+        employees.get(2).setDepartment(department);
+        employees.get(3).setDepartment(department);
 
         session.persist(department);
 
 
+    }
+
+    private static void persistCourse(Session session) {
+      Course course = new Course("Java Programming", null);
+      Course course1 = new Course("C Programming", null);
+
+      List<Course> courseList = Arrays.asList(course1, course);
+
+      Student student = new Student("KavinDharani", null);
+      Student student1 = new Student("Dharani", null);
+
+      List<Student> studentList = Arrays.asList(student1, student);
+
+      course.setStudents(studentList);
+      course1.setStudents(studentList);
+
+      student.setCourses(courseList);
+      student.setCourses(courseList);
+
+      session.persist(student);
+      session.persist(student1);
     }
 }
