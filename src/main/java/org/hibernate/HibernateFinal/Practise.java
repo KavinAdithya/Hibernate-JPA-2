@@ -7,7 +7,10 @@ import org.hibernate.HibernateFinal.mappingRelationship.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.boot.registry.internal.StandardServiceRegistryImpl;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.service.ServiceRegistry;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -30,7 +33,12 @@ public class Practise {
                 .addAnnotatedClass(Course.class);
 
         setProperties(configuration);
-        SessionFactory sessionFactory = configuration.buildSessionFactory();
+
+        ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
+                .applySettings(configuration.getProperties())
+                .build();
+
+        SessionFactory sessionFactory = configuration.buildSessionFactory(serviceRegistry);
 
         Session session = sessionFactory.openSession();
 
@@ -61,7 +69,7 @@ public class Practise {
         configuration.setProperty("hibernate.connection.username", "root");
         configuration.setProperty("hibernate.connection.password", "KavinDharani@3");
         configuration.setProperty("hibernate.show_sql", true);
-        configuration.setProperty("hibernate.hbm2ddl.auto", "update");
+        configuration.setProperty("hibernate.hbm2ddl.auto", "create");
     }
 
 
