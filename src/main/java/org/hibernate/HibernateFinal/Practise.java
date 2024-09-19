@@ -44,20 +44,9 @@ public class Practise {
 
         DateOfBirth dateOfBirth = new DateOfBirth(7, "March", (short) 2005);
 
-       // Employee employee = new Employee("Kavin", 3, LocalTime.now(), dateOfBirth);
-       // User user = new User("Kavin_Adithya", "Kavinadithya3@gmail.com");
 
         Transaction transaction = session.beginTransaction();
 
-//        session.persist(employee);
-//        System.out.println(session.get(Employee.class, 3));
-      //  persistObjects(session);
-
-      //  persistBooks(session);
-      //  persistDepartment(session);
-          persistCourse(session);
-
-        //session.persist(user);
 
         transaction.commit();
     }
