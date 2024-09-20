@@ -64,11 +64,10 @@ public class KeyBoard {
 
     @Override
     public String toString() {
-        return "KeyBoard{" +
+        return "{" +
                 "id = " + id +
                 ", name = '" + name + '\'' +
                 ", cost= " + cost +
-                ", laptop = " + laptop +
                 '}';
     }
 }

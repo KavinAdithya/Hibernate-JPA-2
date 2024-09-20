@@ -18,8 +18,8 @@ public class Driver {
         configuration.setProperty("hibernate.connection.username", "root");
         configuration.setProperty("hibernate.connection.password", "KavinDharani@3");
         configuration.setProperty("hibernate.connection.Driver_class", "com.mysql.cj.jdbc.Driver");
-        configuration.setProperty("hibernate.connection.url", "mysql:jdbc://localhost:3306/finalhibernate");
-        configuration.setProperty("hibernate.connection.show_sql", true);
+        configuration.setProperty("hibernate.connection.url", "jdbc:mysql://localhost:3306/finalhibernate");
+        configuration.setProperty("hibernate.show_sql", true);
         configuration.setProperty("hibernate.hbm2ddl.auto", "update");
 
         return configuration;
@@ -44,7 +44,9 @@ public class Driver {
 
         transaction.begin();
 
-        session.persist(laptop);
+       Laptop laptop1 = session.get(Laptop.class, 1);
+
+       System.out.print(laptop1);
 
         transaction.commit();
     }
