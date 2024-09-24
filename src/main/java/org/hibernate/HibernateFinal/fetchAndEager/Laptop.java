@@ -1,8 +1,13 @@
 package org.hibernate.HibernateFinal.fetchAndEager;
 
-import jakarta.persistence.*;
+import org.hibernate.CustomEntityDirtinessStrategy;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
+import javax.persistence.*;
+import org.hibernate.annotations.Cache;
 @Entity
+@Cacheable
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @Table(name = "Laptop")
 public class Laptop {
 

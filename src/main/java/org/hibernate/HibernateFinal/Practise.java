@@ -57,7 +57,7 @@ public class Practise {
         configuration.setProperty("hibernate.connection.url", "jdbc:mysql://localhost:3306/finalHibernate");
         configuration.setProperty("hibernate.connection.username", "root");
         configuration.setProperty("hibernate.connection.password", "KavinDharani@3");
-        configuration.setProperty("hibernate.show_sql", true);
+        configuration.setProperty("hibernate.show_sql", "true");
         configuration.setProperty("hibernate.hbm2ddl.auto", "create");
     }
 

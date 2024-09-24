@@ -1,6 +1,6 @@
 package org.hibernate.HibernateFinal.entity;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 import java.time.LocalTime;
 

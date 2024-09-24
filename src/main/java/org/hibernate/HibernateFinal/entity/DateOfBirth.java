@@ -1,6 +1,6 @@
 package org.hibernate.HibernateFinal.entity;
 
-import jakarta.persistence.Embeddable;
+import javax.persistence.Embeddable;
 
 @Embeddable
 public class DateOfBirth {

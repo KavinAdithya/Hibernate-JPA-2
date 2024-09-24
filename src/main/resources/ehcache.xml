@@ -1,0 +1,40 @@
+<ehcache>
+    <!-- Default cache settings -->
+    <cache alias="default">
+        <heap unit="entries">1000</heap>   <!-- In-memory cache size -->
+        <expiry>
+            <ttl unit="seconds">120</ttl>   <!-- Time to live -->
+        </expiry>
+    </cache>
+
+    <!-- Cache for specific entity -->
+    <cache alias="org.hibernate.HibernateFinal.fetchAndEager.KeyBoard.java">
+        <heap unit="entries">500</heap>
+        <expiry>
+            <ttl unit="seconds">300</ttl>
+        </expiry>
+    </cache>
+
+    <cache alias="org.hibernate.HibernateFinal.fetchAndEager.Laptop.java">
+        <heap unit="entries">500</heap>
+        <expiry>
+            <ttl unit="seconds">300</ttl>
+        </expiry>
+    </cache>
+
+    <!-- Cache for query results -->
+    <cache alias="org.hibernate.cache.internal.StandardQueryCache">
+        <heap unit="entries">200</heap>
+        <expiry>
+            <ttl unit="seconds">600</ttl>
+        </expiry>
+    </cache>
+
+    <!-- Cache for timestamp regions -->
+    <cache alias="org.hibernate.cache.spi.UpdateTimestampsCache">
+        <heap unit="entries">100</heap>
+        <expiry>
+            <ttl unit="seconds">60</ttl>
+        </expiry>
+    </cache>
+</ehcache>
