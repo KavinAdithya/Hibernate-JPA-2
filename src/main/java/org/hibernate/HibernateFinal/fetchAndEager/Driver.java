@@ -23,7 +23,9 @@ public class Driver {
         configuration.setProperty("hibernate.hbm2ddl.auto", "update");
         configuration.setProperty("hibernate.cache.use_second_level_cache", "true");
         configuration.setProperty("hibernate.cache.region.factory_class", "org.hibernate.cache.ehcache.internal.EhcacheRegionFactory");
-        configuration.setProperty("net.sf.ehcache.configurationResourceName", "ehcache.xml");
+        configuration.setProperty("net.sf.ehcache.configurationResourceName", "/ehcache.xml");
+        configuration.setProperty("hibernate.generate_statistics", "true");
+
 
         return configuration;
     }
@@ -43,19 +45,14 @@ public class Driver {
 
         Session session = sessionFactory.openSession();
 
-        Laptop laptop = new Laptop("Techno", 50000.00, null);
-        KeyBoard keyBoard = new KeyBoard("Dell", 2000.00, laptop);
-        laptop.setKeyBoard(keyBoard);
-
         Transaction transaction = session.getTransaction();
 
         transaction.begin();
 
        Laptop laptop1 = session.get(Laptop.class, 1);
 
-//       System.out.print(laptop2);
-//
-//       System.out.print(laptop1);
+
+      // System.out.println(laptop1);
 
         transaction.commit();
 
@@ -64,6 +61,11 @@ public class Driver {
         transaction1.begin();
 
         Laptop laptop2 = session1.get(Laptop.class, 1);
+        //System.out.print( laptop2);
         transaction1.commit();
+
+        session1.close();
+        session.close();
+        sessionFactory.close();
     }
 }
