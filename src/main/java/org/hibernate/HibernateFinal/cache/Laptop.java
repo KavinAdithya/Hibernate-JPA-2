@@ -8,7 +8,7 @@ import javax.persistence.*;
 
 @Entity
 @Cacheable
-@Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE,  region = "org.hibernate.HibernateFinal.fetchAndEager.KeyBoard")
 @Table(name = "Laptop")
 public class Laptop {
 
@@ -23,8 +23,9 @@ public class Laptop {
     @Column(name = "cost")
     private double cost;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JoinColumn(name = "KeyBoard")
     private KeyBoard keyBoard;
 
     public Laptop(String name, double cost, KeyBoard keyBoard) {

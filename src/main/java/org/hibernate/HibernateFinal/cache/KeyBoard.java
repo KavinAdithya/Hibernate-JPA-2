@@ -7,7 +7,7 @@ import javax.persistence.*;
 
 @Entity
 @Cacheable
-@Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE,  region = "org.hibernate.HibernateFinal.fetchAndEager.Laptop")
 @Table(name = "KeyBoard")
 public class KeyBoard {
 
@@ -22,18 +22,15 @@ public class KeyBoard {
     @Column(name = "KeyBoard_price")
     private double cost;
 
-    @OneToOne(mappedBy = "keyBoard")
-    @Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
-    private Laptop laptop;
+
 
     public KeyBoard() {
         super();
     }
 
-    public KeyBoard(String name, double cost, Laptop laptop ) {
+    public KeyBoard(String name, double cost) {
         this.name = name;
         this.cost = cost;
-        this.laptop = laptop;
     }
 
     public int getId() {
@@ -58,14 +55,6 @@ public class KeyBoard {
 
     public void setCost(double cost) {
         this.cost = cost;
-    }
-
-    public Laptop getLaptop() {
-        return laptop;
-    }
-
-    public void setLaptop(Laptop laptop) {
-        this.laptop = laptop;
     }
 
     @Override
