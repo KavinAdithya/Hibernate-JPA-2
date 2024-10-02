@@ -16,6 +16,24 @@ public class SecondLevel {
     static Configuration configuration = getConfiguration();
     static SessionFactory sessionFactory = buildSessionFactory();
     public static void main(String[] args) {
+       pagination();
+    }
+
+    private static void pagination() {
+        Session session = sessionFactory.openSession();
+
+        Query<Laptop> query = session.createQuery("from Laptop", Laptop.class);
+        query.setFirstResult(1);
+        query.setMaxResults(1);
+
+        List<Laptop> laptops = query.list();
+        System.out.println(laptops);
+
+        session.close();
+        sessionFactory.close();
+    }
+
+    private static void hql() {
         Laptop laptop = new Laptop("Mega Book", 1000.00, null );
         KeyBoard keyBoard = new KeyBoard("Dell", 2000.00);
         laptop.setKeyBoard(keyBoard);
