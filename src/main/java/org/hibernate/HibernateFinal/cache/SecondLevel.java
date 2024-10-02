@@ -33,9 +33,16 @@ public class SecondLevel {
         Query<Object[]> query1 = session.createQuery(hql1);
         query1.setCacheable(true);
         List<Object[]> list1 = query1.list();
+
         System.out.println(list1.get(0)[0]);
+
+        Query<Laptop> query2 = session1.createQuery("FROM Laptop where id = 1", Laptop.class);
+        Laptop laptop3 = query2.uniqueResult();
+        Laptop laptop1 = query2.getSingleResult();
+        System.out.println(laptop3);
         session1.close();
         session.close();
+
         sessionFactory.close();
     }
 
