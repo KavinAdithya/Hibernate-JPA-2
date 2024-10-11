@@ -9,29 +9,61 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
 import org.hibernate.service.ServiceRegistry;
 
-import javax.persistence.Transient;
+
+import java.util.Arrays;
 import java.util.List;
 
 public class SecondLevel {
     static Configuration configuration = getConfiguration();
     static SessionFactory sessionFactory = buildSessionFactory();
     public static void main(String[] args) {
-       pagination();
+       fetch();
+    }
+
+    public static void fetch() {
+        Session session = sessionFactory.openSession();
+
+        session.getTransaction().begin();
+
+        Laptop laptop = session.get(Laptop.class, 4);
+
+        session.getTransaction().commit();
+
+        session.close();
+        System.out.println(laptop.getKeyBoard());
+
+
+        sessionFactory.close();
     }
 
     private static void pagination() {
         Session session = sessionFactory.openSession();
 
-        Query<Laptop> query = session.createQuery("from Laptop", Laptop.class);
-        query.setFirstResult(1);
-        query.setMaxResults(1);
 
-        List<Laptop> laptops = query.list();
-        System.out.println(laptops);
+        Transaction transaction = session.getTransaction();
+        transaction.begin();
+
+        String hql = "from Laptop l Inner Join l.keyBoard k where l.id = 4";
+
+        Query<Object[]> query = session.createQuery(hql);
+        query.setCacheable(true);
+
+        Object[] lap = query.uniqueResult();
+
+        System.out.println(Arrays.toString(lap));
+
+        Query<Object[]> query1 = session.createQuery(hql);
+        query1.setCacheable(true);
+        Object[] lap1 = query1.uniqueResult();
+
+        System.out.println(Arrays.toString(lap1));
+        transaction.commit();
 
         session.close();
         sessionFactory.close();
     }
+
+
 
     private static void hql() {
         Laptop laptop = new Laptop("Mega Book", 1000.00, null );

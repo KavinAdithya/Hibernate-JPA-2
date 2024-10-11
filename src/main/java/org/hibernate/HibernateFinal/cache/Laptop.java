@@ -23,7 +23,7 @@ public class Laptop {
     @Column(name = "cost")
     private double cost;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JoinColumn(name = "KeyBoard")
     private KeyBoard keyBoard;
