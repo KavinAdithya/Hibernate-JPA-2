@@ -10,6 +10,10 @@ import org.hibernate.query.Query;
 import org.hibernate.service.ServiceRegistry;
 
 
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.util.Arrays;
 import java.util.List;
 
@@ -17,9 +21,31 @@ public class SecondLevel {
     static Configuration configuration = getConfiguration();
     static SessionFactory sessionFactory = buildSessionFactory();
     public static void main(String[] args) {
-       fetch();
+        criteriaAPI();
     }
 
+
+    public static void criteriaAPI() {
+        Session session = sessionFactory.openSession();
+        CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+
+        CriteriaQuery<Laptop> criteriaQuery = criteriaBuilder.createQuery(Laptop.class);
+
+        Root<Laptop> root = criteriaQuery.from(Laptop.class);
+
+        criteriaQuery.select(root).where(criteriaBuilder.equal(root.get("name"), "Mega Book"));
+
+        TypedQuery<Laptop> typedQuery = session.createQuery(criteriaQuery);
+
+        List<Laptop> list = typedQuery.getResultList();
+
+        for (Laptop laptop : list)
+            System.out.println(laptop);
+
+
+        session.close();
+        sessionFactory.close();
+    }
     public static void fetch() {
         Session session = sessionFactory.openSession();
 
