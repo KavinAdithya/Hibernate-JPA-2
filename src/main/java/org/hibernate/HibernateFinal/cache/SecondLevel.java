@@ -13,6 +13,7 @@ import org.hibernate.service.ServiceRegistry;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.util.Arrays;
 import java.util.List;
@@ -21,7 +22,28 @@ public class SecondLevel {
     static Configuration configuration = getConfiguration();
     static SessionFactory sessionFactory = buildSessionFactory();
     public static void main(String[] args) {
-        criteriaAPI();
+        criteriaAPI1();
+    }
+
+    public static void criteriaAPI1() {
+        Session session = sessionFactory.openSession();
+
+        CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+
+        CriteriaQuery<Laptop> criteriaQuery = criteriaBuilder.createQuery(Laptop.class);
+        Root<Laptop> root = criteriaQuery.from(Laptop.class);
+
+
+        Predicate predicate = criteriaBuilder.greaterThan(root.get("id"), 2);
+
+        criteriaQuery.select(root).where(predicate);
+
+        TypedQuery<Laptop> typedQuery = session.createQuery(criteriaQuery);
+
+        System.out.println(typedQuery.getResultList());
+
+        session.close();
+        sessionFactory.close();
     }
 
 
