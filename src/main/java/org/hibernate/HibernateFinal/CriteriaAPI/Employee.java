@@ -24,8 +24,8 @@ public class Employee {
         super();
     }
 
-    public Employee(int id, String name, double salary) {
-        this.id = id;
+    public Employee( String name,int age,  double salary) {
+        this.age = age;
         this.name = name;
         this.salary = salary;
     }
